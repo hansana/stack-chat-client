@@ -4,9 +4,8 @@
 
 <div *ngIf="isAuthenticated">
   <app-header></app-header>
-    <div class="container">
-      <!-- <router-outlet></router-outlet> -->
-      <app-chat-list [user]="user"></app-chat-list>
-    </div>
+  <div class="container">
+    <app-chat-list [user]="user"></app-chat-list>
+  </div>
   <!-- <app-footer></app-footer> -->
 </div>

@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   private subscribeToEvents(): void {  
-    this._loginService.authenticated.subscribe((user: IUser) => {  
+    this._loginService.authenticated.subscribe((user: IUser) => {
       this._ngZone.run(() => {
         if (user.id !== undefined || user.id !== '') {
           this.user = user;
@@ -34,8 +34,9 @@ export class AppComponent {
   }
 
   checkUserLoggedIn() {
-    this.user = JSON.parse(sessionStorage.getItem('isUserAvailable'));
-    if (this.user !== undefined && this.user !== null && this.user.userName !== undefined && this.user.userName !== "") {
+    const jsonUser: IUser = JSON.parse(sessionStorage.getItem('isUserAvailable'));
+    if (jsonUser !== undefined && jsonUser !== null && jsonUser.userName !== undefined && jsonUser.userName !== "") {
+      this.user = jsonUser;
       this.isAuthenticated = true;
     }
   }

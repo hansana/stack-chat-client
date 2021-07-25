@@ -35,7 +35,6 @@ export class ChatViewComponent implements OnInit {
       .subscribe(
         (res: Message[]) => {
           if (res !== undefined && res.length > 0) {
-            console.log("all messages: ", res);
             res.forEach(message => {
               this.messages.push(message);
             });
@@ -57,8 +56,6 @@ export class ChatViewComponent implements OnInit {
       this.messages.push(this.message);
       this._chatService.sendMessage(this.message);  
       this.txtMessage = '';
-
-      console.log(this.messages);
     }  
   }
 
@@ -68,7 +65,6 @@ export class ChatViewComponent implements OnInit {
         if (message.userId !== this.user.id) {
           this.messages.push(message);
         }
-        console.log(this.messages);
       });
     });
   }

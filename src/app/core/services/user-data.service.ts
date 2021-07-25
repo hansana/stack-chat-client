@@ -28,7 +28,6 @@ export class UserDataService {
     return this.http.put<any>(`${this.userBaseUrl}/${id}`, this.connection)
       .pipe(
         map(res => {
-          console.log(res);
           return res;
         }),
         catchError(this.handleError) 
