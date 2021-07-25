@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Message } from 'src/app/shared/models/Message';
+import { environment } from '../../../environments/environment';
 declare var $: any;  
 
 @Injectable({
@@ -10,6 +11,7 @@ export class ChatService {
   connectionEstablished = new EventEmitter<Boolean>();
   connectionIdReceived = new EventEmitter<string>();
   
+  chatBaseUrl = environment.baseUrl;
   private connectionIsEstablished = false;
   private hubConnection: any;
   private proxy: any;
@@ -29,7 +31,7 @@ export class ChatService {
   }
   
   private createConnection() {
-    this.hubConnection = $.hubConnection("https://localhost:44348");
+    this.hubConnection = $.hubConnection(this.chatBaseUrl);
     this.proxy = this.hubConnection.createHubProxy("StackHub");
   }
 

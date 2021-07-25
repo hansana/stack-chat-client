@@ -2,19 +2,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatListService {
-  loginBaseUrl = 'https://localhost:44348/api/messages';
+  messagesBaseUrl = `${environment.baseUrl}/api/messages`;
 
   constructor(
     private http: HttpClient
     ) { }
 
   getAllMessage(): Observable<any> {
-    return this.http.get<any>(this.loginBaseUrl)
+    return this.http.get<any>(this.messagesBaseUrl)
       .pipe(
         map(res => {
           const response = res.Value;

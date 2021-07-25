@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDataService {
-  loginBaseUrl = 'https://localhost:44348/api/users';
+  userBaseUrl = `${environment.baseUrl}/api/users`;
   connection = {
     connectionId: ''
   }
@@ -19,12 +20,12 @@ export class UserDataService {
   updateConnectionId(id: string, connectionId: string): Observable<any> {
     this.connection.connectionId = connectionId;
 
-    this.http.get<any>(`${this.loginBaseUrl}?searchString=hansana`)
+    this.http.get<any>(`${this.userBaseUrl}?searchString=hansana`)
     .pipe(
       catchError(this.handleError)
     );
 
-    return this.http.put<any>(`${this.loginBaseUrl}/${id}`, this.connection)
+    return this.http.put<any>(`${this.userBaseUrl}/${id}`, this.connection)
       .pipe(
         map(res => {
           console.log(res);

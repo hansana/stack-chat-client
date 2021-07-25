@@ -2,14 +2,15 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { IResponse, IUser } from 'src/app/shared/interfaces/shared-interface';
+import { IUser } from 'src/app/shared/interfaces/shared-interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   authenticated = new EventEmitter<IUser>();
-  loginBaseUrl = 'https://localhost:44348/api/login';
+  loginBaseUrl = `${environment.baseUrl}/api/login`;
 
   constructor(
     private http: HttpClient
