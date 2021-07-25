@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://localhost:44348"
+  // baseUrl: "https://localhost:44348"
+  baseUrl: "https://stackchatapi20210725193526.azurewebsites.net"
 };
 
 /*
