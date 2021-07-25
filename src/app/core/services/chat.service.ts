@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Message } from 'src/app/shared/models/Message';
+import { Message } from '../../shared/models/Message';
 import { environment } from '../../../environments/environment';
 declare var $: any;  
 

@@ -1,8 +1,6 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 
-import { Message } from '../shared/models/Message';  
-import { ChatService } from '../core/services/chat.service';  
-import { IUser } from '../shared/interfaces/shared-interface';
+import { ChatService } from '../core/services/chat.service';
 import { UserDataService } from '../core/services/user-data.service';
 
 @Component({
