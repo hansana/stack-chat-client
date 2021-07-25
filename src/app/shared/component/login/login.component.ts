@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { LoggerService } from 'src/app/core/services/logger.service';
 import { LoginService } from 'src/app/core/services/login.service';
 import { IResponse, IUser } from '../../interfaces/shared-interface';
@@ -21,7 +20,6 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private route: ActivatedRoute,
     private dataService: LoginService,
     private logger: LoggerService) { }
 
