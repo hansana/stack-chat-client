@@ -1,0 +1,36 @@
+.chat-message-date {
+  font-size: small;
+  color: #ffb0b0;
+  text-align: end;
+}
+
+.own-message-date {
+  font-size: small;
+  color: #ffb0b0;
+}
+
+.chat-content {
+  border-radius: 13px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background: #ece2cf;
+}
+
+.own-chat-content {
+  border-radius: 13px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background: white;
+}
+
+.chat-send-btn {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 10px;
+  background: #2f2f2f;
+}
+
+.spacer-row {
+  height: 120px;
+}
