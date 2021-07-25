@@ -2,7 +2,7 @@ import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { ChatListService } from '../core/services/chat-list.service';
 import { ChatService } from '../core/services/chat.service';
 import { LoggerService } from '../core/services/logger.service';
-import { Message, MESSAGE_TYPE } from '../shared/models/Message';
+import { Message, MESSAGE_TYPE } from '../shared/models/message';
 
 @Component({
   selector: 'app-chat-view',
