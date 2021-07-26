@@ -1,6 +1,13 @@
-<div class="container-fluid d-flex flex-column h-100">
+<div class="container-fluid d-flex flex-column h-100" #scrollMe>
   <div class="row">
     <div class="container">
+      <div class="row mt-3" *ngIf="hasMore">
+        <div class="col div-align-center">
+          <button type="button" class="btn btn-secondary" (click)="getMessages(true)">
+            Load more
+          </button>
+        </div>
+      </div>
       <div class="row mt-3" *ngFor="let msg of messages">
         <div class="col" *ngIf="msg.userId !== user.id">
           <div class="row">
@@ -16,9 +23,6 @@
           </div>
         </div>
         <div class="col" *ngIf="msg.userId === user.id">
-          <!-- <div class="row">
-            <span class="badge badge-secondary">{{msg.userName}}</span>
-          </div> -->
           <div class="row mt-1">
             <div class="col own-message-date">
               {{msg.date | date:'MMM d, y, h:mm a'}}
@@ -35,9 +39,6 @@
   <div class="row mt-auto pt-4 chat-send-btn">
     <div class="container">
       <div class="row">
-        <!-- <div class="col-8">  
-          <input type="text" [value]="txtMessage" (input)="txtMessage=$event.target.value" (keydown.enter)="sendMessage()" placeholder="Type a message" />  
-        </div> -->
         <div class="col-md-10 col-xs-auto mb-3">
           <input type="text" class="form-control" name="userName" [(ngModel)]="txtMessage" (keydown.enter)="sendMessage()" #userName="ngModel" required>
         </div>

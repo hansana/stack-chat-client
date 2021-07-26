@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class LoginService {
   authenticated = new EventEmitter<IUser>();
+  logoutEmitter = new EventEmitter<boolean>();
   loginBaseUrl = `${environment.baseUrl}/api/login`;
 
   constructor(
@@ -21,12 +22,17 @@ export class LoginService {
       .pipe(
         map(res => {
           const response = res.Value.Data as IUser;
-          sessionStorage.setItem('isUserAvailable', JSON.stringify(response));
+          localStorage.setItem('isUserAvailable', JSON.stringify(response));
           this.authenticated.emit(response);
           return response;
         }),
         catchError(this.handleError)
       );
+  }
+
+  logout(): void {
+    localStorage.removeItem('isUserAvailable');
+    this.logoutEmitter.emit(true);
   }
 
   private handleError(error: HttpErrorResponse) {

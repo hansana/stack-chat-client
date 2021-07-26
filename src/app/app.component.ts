@@ -29,12 +29,18 @@ export class AppComponent {
           this.user = user;
           this.isAuthenticated = true;
         };
-      });  
-    });  
+      });
+    });
+
+    this._loginService.logoutEmitter.subscribe((isLogOut: Boolean) => {
+      this._ngZone.run(() => {
+        if (isLogOut) { this.isAuthenticated = false; }
+      })
+    })
   }
 
   checkUserLoggedIn() {
-    const jsonUser: IUser = JSON.parse(sessionStorage.getItem('isUserAvailable'));
+    const jsonUser: IUser = JSON.parse(localStorage.getItem('isUserAvailable'));
     if (jsonUser !== undefined && jsonUser !== null && jsonUser.userName !== undefined && jsonUser.userName !== "") {
       this.user = jsonUser;
       this.isAuthenticated = true;

@@ -9,35 +9,20 @@
   <div class="col-md-6 col-sm-12">
      <div class="login-form">
         <form (ngSubmit)="createLogin()" #loginForm="ngForm" novalidate>
-          <!-- <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel" required>
-            <div class="alert alert-danger" [hidden]="firstName.pristine || firstName.valid">First Name is required</div>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" #lastName="ngModel" required>
-            <div class="alert alert-danger" [hidden]="lastName.pristine || lastName.valid">Last Name is required</div>
-          </div> -->
           <div class="form-group">
             <label class="label-color">Email</label>
-            <input type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required>
-            <div class="alert alert-danger" [hidden]="email.pristine || email.valid">Last Name is required</div>
+            <input type="email" email class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required>
+            <div class="alert alert-danger" [hidden]="email.pristine || email.valid">Valid email is required</div>
           </div>
           <div class="form-group">
             <label class="label-color">Display Name</label>
             <input type="text" class="form-control" name="userName" [(ngModel)]="user.userName" #userName="ngModel" required>
-            <div class="alert alert-danger" [hidden]="userName.pristine || userName.valid">Last Name is required</div>
+            <div class="alert alert-danger" [hidden]="userName.pristine || userName.valid">Display name is required</div>
           </div>
 
           <div class="pull-right">
-            <!-- <button class="btn btn-default" (click)="cancel($event)">Cancel</button>&nbsp;&nbsp; -->
             <button type="submit" class="btn btn-block btn-success" [disabled]="loginForm.pristine || !loginForm.valid">Log In</button>
           </div>
-
-
-           <!-- <button type="submit" class="btn btn-black">Login</button>
-           <button type="submit" class="btn btn-secondary">Register</button> -->
         </form>
      </div>
   </div>

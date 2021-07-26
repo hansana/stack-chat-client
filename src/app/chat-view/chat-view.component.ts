@@ -15,7 +15,10 @@ export class ChatViewComponent implements OnInit {
   txtMessage: string = '';
   messages = new Array<Message>();
   message = new Message();
-
+  pageSize: number = 10;
+  pageNumber: number = 1;
+  isLoading: boolean = false;
+  hasMore: boolean = false;
 
   constructor(
     private _chatService: ChatService,
@@ -30,18 +33,29 @@ export class ChatViewComponent implements OnInit {
   ngOnInit() {
   }
 
-  getMessages(): void {
-    this._chatListService.getAllMessage()
+  getMessages(loadMore: boolean = false): void {
+    this._chatListService.getAllMessage(this.pageNumber, this.pageSize)
       .subscribe(
         (res: Message[]) => {
           if (res !== undefined && res.length > 0) {
-            res.forEach(message => {
-              this.messages.push(message);
-            });
+            this.messages = res.concat(this.messages);
+            if (res.length < 10) {
+              this.hasMore = false;
+            } else {
+              this.hasMore = true;
+            }
+          } else {
+            this.hasMore = false;
           }
+
+          if (!loadMore) {
+            this.scollToBottom();
+          }
+          
+          this.pageNumber++;
         },
         (err: any) => this._logger.logError(err),
-        () => this._logger.log(`User created successfylly`)
+        () => this._logger.log(`Messages loaded successfylly`)
       )
   }
   
@@ -56,6 +70,7 @@ export class ChatViewComponent implements OnInit {
       this.messages.push(this.message);
       this._chatService.sendMessage(this.message);  
       this.txtMessage = '';
+      this.scollToBottom();
     }  
   }
 
@@ -64,8 +79,13 @@ export class ChatViewComponent implements OnInit {
       this._ngZone.run(() => {
         if (message.userId !== this.user.id) {
           this.messages.push(message);
+          this.scollToBottom();
         }
       });
     });
+  }
+
+  private scollToBottom(){
+    setTimeout(function(){ window.scrollTo(0, document.body.scrollHeight); }, 100);
   }
 }

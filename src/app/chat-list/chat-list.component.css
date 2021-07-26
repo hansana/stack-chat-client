@@ -6,3 +6,19 @@
   margin-bottom: 70px;
   margin-top: 55px;
 }
+
+.alart-box {
+  text-align: right;
+  margin-bottom: unset;
+  padding: 3px;
+  animation-name: alert-box-wrapper-animation;
+  animation-duration: 0.5s;
+}
+
+.alart-container {
+  position: fixed;
+  top: 59px;
+  right: 0;
+  z-index: 99999;
+  width: auto;
+}

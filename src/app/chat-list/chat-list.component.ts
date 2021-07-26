@@ -10,25 +10,35 @@ import { UserDataService } from '../core/services/user-data.service';
 })
 export class ChatListComponent implements OnInit {
   @Input() user: any;
+  alarts = new Array<string>();
 
   constructor(
     private _chatService: ChatService,
     private _userService: UserDataService,
     private _ngZone: NgZone
   ) {
-    this.updateUserConnectionId();
+    this.subscribeToEvents();
   }
 
   ngOnInit() {
   }
 
-  private updateUserConnectionId(): void {
+  private subscribeToEvents(): void {
     this._chatService.connectionIdReceived.subscribe((connectionId: string) => {
       this._ngZone.run(() => {
         if (connectionId !== undefined || connectionId !== '') {
           this._userService.updateConnectionId(this.user.id, connectionId);
         };
       });
+    });
+
+    this._chatService.userLogedIn.subscribe((message: string) => {
+      this._ngZone.run(() => {
+        this.alarts.push(message);
+        setTimeout(() => {
+          this.alarts.shift();
+        }, 4000);
+      })
     });
   }
 }

@@ -14,8 +14,8 @@ export class ChatListService {
     private http: HttpClient
     ) { }
 
-  getAllMessage(): Observable<any> {
-    return this.http.get<any>(this.messagesBaseUrl)
+  getAllMessage(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.messagesBaseUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
       .pipe(
         map(res => {
           const response = res.Value;

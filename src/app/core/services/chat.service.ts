@@ -10,9 +10,9 @@ export class ChatService {
   messageReceived = new EventEmitter<Message>();
   connectionEstablished = new EventEmitter<Boolean>();
   connectionIdReceived = new EventEmitter<string>();
+  userLogedIn = new EventEmitter<string>();
   
   chatBaseUrl = environment.baseUrl;
-  private connectionIsEstablished = false;
   private hubConnection: any;
   private proxy: any;
   
@@ -23,11 +23,7 @@ export class ChatService {
   }
   
   sendMessage(message: Message) {
-    //this.proxy.state.connectionId = "Fadi Fakhouri";
     this.proxy.invoke('SendMessageToClient', message);
-    
-
-    //this.proxy.invoke('BroadcastMessage', message);
   }
   
   private createConnection() {
@@ -40,7 +36,6 @@ export class ChatService {
         console.log('Now connected ' + data.transport.name + ', connection ID= ' + data.id);
         this.connectionIdReceived.emit(data.id);
         this.connectionEstablished.emit(true);
-        this.connectionIsEstablished = true;
     }).fail((error: any) => {
         console.log('Could not connect ' + error);
         this.connectionEstablished.emit(false);
@@ -49,8 +44,11 @@ export class ChatService {
  
   private registerOnServerEvents(): void {
     this.proxy.on('messageReceived', (data: any) => {
-      console.log(data);
       this.messageReceived.emit(data);
+    });
+
+    this.proxy.on('userLogin', (data: any) => {
+      this.userLogedIn.emit(data);
     });
   }
 }
