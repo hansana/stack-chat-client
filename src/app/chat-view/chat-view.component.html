@@ -40,7 +40,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-10 col-xs-auto mb-3">
-          <input type="text" class="form-control" name="userName" [(ngModel)]="txtMessage" (keydown.enter)="sendMessage()" #userName="ngModel" required>
+          <textarea style="height:38px;max-height:150px;min-height:38px;" type="text" class="form-control" name="userName" [(ngModel)]="txtMessage" (keydown.enter)="sendMessage()" #userName="ngModel" ></textarea>
         </div>
         <div class="col">
           <button type="button" class="btn btn-block btn-primary" (click)="sendMessage()">

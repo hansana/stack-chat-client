@@ -39,19 +39,12 @@ export class ChatViewComponent implements OnInit {
         (res: Message[]) => {
           if (res !== undefined && res.length > 0) {
             this.messages = res.concat(this.messages);
-            if (res.length < 10) {
-              this.hasMore = false;
-            } else {
-              this.hasMore = true;
-            }
+            this.hasMore = res.length < 10 ? false : true;
           } else {
             this.hasMore = false;
           }
 
-          if (!loadMore) {
-            this.scollToBottom();
-          }
-          
+          if (!loadMore) { this.scollToBottom(); }
           this.pageNumber++;
         },
         (err: any) => this._logger.logError(err),
