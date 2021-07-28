@@ -3,8 +3,12 @@
     <div class="container">
       <div class="row mt-3" *ngIf="hasMore">
         <div class="col div-align-center">
-          <button type="button" class="btn btn-secondary" (click)="getMessages(true)">
-            Load more
+          <button type="button" class="btn btn-secondary" (click)="getMessages(true)" [disabled]="isLoading">
+            <div *ngIf="isLoading; else elseBlock">
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+              Loading...
+            </div>
+            <ng-template #elseBlock>Load more</ng-template>
           </button>
         </div>
       </div>

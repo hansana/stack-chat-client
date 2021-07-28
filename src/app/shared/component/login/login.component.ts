@@ -9,6 +9,7 @@ import { IResponse, IUser } from '../../interfaces/shared-interface';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isLoading: boolean = false;
   user: IUser = {
     id: '',
     firstName: '',
@@ -20,20 +21,27 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private dataService: LoginService,
+    private _loginService: LoginService,
     private logger: LoggerService) { }
 
   ngOnInit() {
   }
 
   createLogin() {
-    this.dataService.createLogin(this.user)
+    this.isLoading = true;
+    this._loginService.createLogin(this.user)
       .subscribe(
         (res: IResponse<IUser>) => {
           this.user = res.data;
         },
-        (err: any) => this.logger.logError(err),
-        () => this.logger.log(`User created successfylly`)
+        (err: any) => {
+          this.isLoading = false;
+          this.logger.logError(err);
+        },
+        () => {
+          this.isLoading = false;
+          this.logger.log(`User created successfylly`);
+        }
       )
   }
 }

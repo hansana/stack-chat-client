@@ -21,7 +21,14 @@
           </div>
 
           <div class="pull-right">
-            <button type="submit" class="btn btn-block btn-success" [disabled]="loginForm.pristine || !loginForm.valid">Log In</button>
+            <button type="submit" class="btn btn-block btn-success" [disabled]="loginForm.pristine || !loginForm.valid || isLoading">
+              <div *ngIf="isLoading; else elseBlock">
+                <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                <span class="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+              </div>
+              <ng-template #elseBlock>Log In</ng-template>
+            </button>
           </div>
         </form>
      </div>

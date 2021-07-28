@@ -34,6 +34,7 @@ export class ChatViewComponent implements OnInit {
   }
 
   getMessages(loadMore: boolean = false): void {
+    this.isLoading = true;
     this._chatListService.getAllMessage(this.pageNumber, this.pageSize)
       .subscribe(
         (res: Message[]) => {
@@ -47,8 +48,8 @@ export class ChatViewComponent implements OnInit {
           if (!loadMore) { this.scollToBottom(); }
           this.pageNumber++;
         },
-        (err: any) => this._logger.logError(err),
-        () => this._logger.log(`Messages loaded successfylly`)
+        (err: any) => { this._logger.logError(err); this.isLoading = false; },
+        () => { this._logger.log(`Messages loaded successfylly`); this.isLoading = false; }
       )
   }
   
